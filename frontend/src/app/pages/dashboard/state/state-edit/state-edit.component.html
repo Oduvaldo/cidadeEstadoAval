@@ -1,0 +1,29 @@
+<h2 mat-dialog-title *ngIf="!data.idState">Incluir Estado</h2>
+<h2 mat-dialog-title *ngIf="data.idState">Editar Estado</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="formGroup">
+    <mat-grid-list cols="12" rowHeight="60">
+
+      <mat-grid-tile colspan="6">
+        <mat-form-field class="form-field">
+          <input matInput type="text" placeholder="Nome" formControlName="name" maxlength="50" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="6">
+        <mat-form-field class="form-field">
+          <input matInput type="text" placeholder="Abreviação" formControlName="abbreviation" maxlength="2" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button [disabled]="!formGroup.valid" (click)="save()" cdkFocusInitial>Salvar</button>
+</mat-dialog-actions>

@@ -1,0 +1,53 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Cadastro de Estados</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Localizar...</mat-label>
+      <input matInput type="text" [(ngModel)]="search" (keyup)="onKeyUp()" #input>
+      <button mat-button *ngIf="search" matSuffix mat-icon-button (click)="applyFilter()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-button *ngIf="search" matSuffix mat-icon-button (click)="clearFilter()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="container mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let state">{{state.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="abbreviation">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 200px;">Abreviação</th>
+          <td mat-cell *matCellDef="let state" style="text-align: center;">{{state.abbreviation}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="update">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 30px;"></th>
+          <td mat-cell *matCellDef="let state" style="text-align: center;">
+            <mat-icon style="cursor: pointer;" (click)="onUpdateState(state)" matTooltip="Editar">edit</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 30px;"></th>
+          <td mat-cell *matCellDef="let state" style="text-align: center;">
+            <mat-icon style="cursor: pointer;" (click)="onDeleteState(state)" matTooltip="Remover">delete</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onAddState()">Novo</button>
+  </mat-card-actions>
+</mat-card>
